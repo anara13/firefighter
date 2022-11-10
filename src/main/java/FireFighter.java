@@ -1,8 +1,6 @@
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
-import java.util.List;
-
 public class FireFighter extends Canvas implements Draw{
 
     Position position;
@@ -14,13 +12,5 @@ public class FireFighter extends Canvas implements Draw{
 
     }
 
-    /*private Model.Position activateFirefighter(Model.Position position) {
-        Model.Position randomPosition = Model.aStepTowardFire(position);
-        List<Model.Position> nextFires = next(randomPosition).stream().filter(fires::contains).toList();
-        extinguish(randomPosition);
-        for (Model.Position fire : nextFires)
-            extinguish(fire);
-        return randomPosition;
-    }*/
 
 }

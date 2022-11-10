@@ -5,9 +5,9 @@ public class Model {
   Grid grid;
   double colCount;
   double rowCount;
-  List<Position> firefighters = new ArrayList<>();
+  List<FireFighter> firefighters = new ArrayList<>();
   Set<Position> fires = new HashSet<>();
-  List<Position> ffNewPositions;
+  List<FireFighter> ffNewPositions;
   int step = 0;
 
   public Model(Grid grid) {
@@ -31,10 +31,10 @@ public class Model {
 
   public void activation() {
     ffNewPositions = new ArrayList<>();
-    for (Position ff : firefighters) {
+    for (FireFighter ff : firefighters) {
       Position newPosition = activateFirefighter(ff);
-      grid.paint(ff.row, ff.col);
-      grid.paintFF(newPosition.row, newPosition.col);
+      grid.paint(ff.position.row, ff.position.col);
+      FireFighter.paint(newPosition.row, newPosition.col, grid.width, grid.height, grid.colCount, grid.rowCount);
 
       ffNewPositions.add(newPosition);
     }
@@ -58,8 +58,8 @@ public class Model {
   }
 
 
-  private Position activateFirefighter(Position position) {
-    Position randomPosition = aStepTowardFire(position);
+  private Position activateFirefighter(FireFighter firefighter) {
+    Position randomPosition = aStepTowardFire(firefighter.position);
     List<Position> nextFires = next(randomPosition).stream().filter(fires::contains).toList();
     extinguish(randomPosition);
     for (Position fire : nextFires)

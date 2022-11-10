@@ -1,4 +1,5 @@
-public class Position{
+
+public class Position extends FireFighter {
     int row;
     int col;
 

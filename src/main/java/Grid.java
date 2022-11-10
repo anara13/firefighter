@@ -46,11 +46,6 @@ public class Grid extends Canvas{
         getGraphicsContext2D().fillRect(row*height/rowCount,col*width/colCount,height/rowCount,width/colCount);
     }
 
-    public void paintFF(int row, int col) {
-        getGraphicsContext2D().setFill(Color.BLUE);
-        getGraphicsContext2D().fillOval(row*height/rowCount,col*width/colCount,height/rowCount,width/colCount);
-    }
-
     public void paintFire(int row, int col) {
         getGraphicsContext2D().setFill(Color.RED);
         getGraphicsContext2D().fillRect(row*height/rowCount,col*width/colCount,height/rowCount,width/colCount);
