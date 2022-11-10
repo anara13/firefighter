@@ -2,7 +2,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-public class Grid extends Canvas {
+public class Grid extends Canvas{
     double width;
     double height;
     double colCount;

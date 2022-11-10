@@ -35,6 +35,7 @@ public class Model {
       Position newPosition = activateFirefighter(ff);
       grid.paint(ff.row, ff.col);
       grid.paintFF(newPosition.row, newPosition.col);
+
       ffNewPositions.add(newPosition);
     }
     firefighters = ffNewPositions;
@@ -45,6 +46,7 @@ public class Model {
       }
       for (Position newFire : newFires)
         grid.paintFire(newFire.row, newFire.col);
+
       fires.addAll(newFires);
     }
     step++;
@@ -99,7 +101,5 @@ public class Model {
     }
     return position;
   }
-
-  public record Position(int row, int col) {
-  }
+  //public record Position(int row, int col){}
 }
