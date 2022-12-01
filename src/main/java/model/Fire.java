@@ -1,10 +1,16 @@
+package model;
+
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
+import model.Draw;
+
 import java.util.List;
 
-public class Fire extends Canvas implements Draw{
+public class Fire extends Position implements Draw {
 
-    Position position;
+    public Fire(int row, int col) {
+        super(row, col);
+    }
 
     @Override
     public void paint(int row, int col, double width, double height, double colCount, double rowCount) {
@@ -15,5 +21,6 @@ public class Fire extends Canvas implements Draw{
     /*private List<Position> activateFire(Position position) {
         return next(position);
     }*/
+
 
 }

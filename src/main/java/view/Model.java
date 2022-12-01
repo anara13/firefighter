@@ -1,3 +1,9 @@
+package view;
+
+import model.Fire;
+import model.FireFighter;
+import model.Position;
+
 import java.util.*;
 
 
@@ -6,8 +12,10 @@ public class Model {
   double colCount;
   double rowCount;
   List<FireFighter> firefighters = new ArrayList<>();
-  Set<Position> fires = new HashSet<>();
   List<FireFighter> ffNewPositions;
+  List<Fire> fires = new ArrayList<>();
+  List<Fire> firesNewPositions;
+
   int step = 0;
 
   public Model(Grid grid) {
@@ -19,9 +27,9 @@ public class Model {
 
   public void initialisation(int fireNumber, int fireFighterNumber) {
     for (int index = 0; index < fireNumber; index++)
-      fires.add(randomPosition());
+      fires.add((Fire) randomPosition());
     for (int index = 0; index < fireFighterNumber; index++)
-      firefighters.add(randomPosition());
+      firefighters.add((FireFighter) randomPosition());
   }
 
   private Position randomPosition() {
@@ -33,19 +41,19 @@ public class Model {
     ffNewPositions = new ArrayList<>();
     for (FireFighter ff : firefighters) {
       Position newPosition = activateFirefighter(ff);
-      grid.paint(ff.position.row, ff.position.col);
-      FireFighter.paint(newPosition.row, newPosition.col, grid.width, grid.height, grid.colCount, grid.rowCount);
+      grid.paint(ff.row, ff.col);
+      ff.paint(newPosition.row, newPosition.col, grid.width, grid.height, grid.colCount, grid.rowCount);
 
-      ffNewPositions.add(newPosition);
+      ffNewPositions.add((FireFighter) newPosition);
     }
     firefighters = ffNewPositions;
     if (step % 2 == 0) {
-      List<Position> newFires = new ArrayList<>();
-      for (Position fire : fires) {
+      List<Fire> newFires = new ArrayList<>();
+      for (Fire fire : fires) {
         newFires.addAll(activateFire(fire));
       }
-      for (Position newFire : newFires)
-        grid.paintFire(newFire.row, newFire.col);
+      for (Fire newFire : newFires)
+        newFire.paint(newFire.row, newFire.col, grid.width, grid.height, grid.colCount, grid.rowCount);
 
       fires.addAll(newFires);
     }
@@ -53,13 +61,12 @@ public class Model {
 
   }
 
-  private List<Position> activateFire(Position position) {
-    return next(position);
+  private List<Fire> activateFire(Fire fire) {
+    return next(fire);
   }
 
-
   private Position activateFirefighter(FireFighter firefighter) {
-    Position randomPosition = aStepTowardFire(firefighter.position);
+    Position randomPosition = aStepTowardFire(firefighter);
     List<Position> nextFires = next(randomPosition).stream().filter(fires::contains).toList();
     extinguish(randomPosition);
     for (Position fire : nextFires)

@@ -1,3 +1,5 @@
+package view;
+
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -7,7 +9,7 @@ public class Grid extends Canvas{
     double height;
     double colCount;
     double rowCount;
-    Model model;
+    public Model model;
 
 
     public Grid(int width, int height, int colCount, int rowCount) {
@@ -33,7 +35,7 @@ public class Grid extends Canvas{
         repaint();
     }
 
-    void repaint(){
+    public void repaint(){
         for(int col=0; col<colCount; col++)
             getGraphicsContext2D().strokeLine(0, col*width/colCount, height, col*width/colCount);
         for(int row=0; row<rowCount;row++)
@@ -43,11 +45,6 @@ public class Grid extends Canvas{
 
     void paint(int row, int col){
         getGraphicsContext2D().setFill(Color.WHITE);
-        getGraphicsContext2D().fillRect(row*height/rowCount,col*width/colCount,height/rowCount,width/colCount);
-    }
-
-    public void paintFire(int row, int col) {
-        getGraphicsContext2D().setFill(Color.RED);
         getGraphicsContext2D().fillRect(row*height/rowCount,col*width/colCount,height/rowCount,width/colCount);
     }
 

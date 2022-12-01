@@ -1,3 +1,5 @@
+package controller;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -9,6 +11,7 @@ import javafx.stage.Stage;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import view.Grid;
 
 public class App extends Application {
 
